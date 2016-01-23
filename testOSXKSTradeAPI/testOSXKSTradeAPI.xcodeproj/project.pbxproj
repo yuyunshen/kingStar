@@ -1,0 +1,494 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		30BC09251C5357D40078BCA8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 30BC09241C5357D40078BCA8 /* AppDelegate.m */; };
+		30BC092A1C5357D40078BCA8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30BC09291C5357D40078BCA8 /* ViewController.m */; };
+		30BC092C1C5357D40078BCA8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30BC092B1C5357D40078BCA8 /* Images.xcassets */; };
+		30BC092F1C5357D40078BCA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30BC092D1C5357D40078BCA8 /* Main.storyboard */; };
+		30BC093B1C5357D50078BCA8 /* testOSXKSTradeAPITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30BC093A1C5357D50078BCA8 /* testOSXKSTradeAPITests.m */; };
+		30BC09451C5358A40078BCA8 /* sdk in Resources */ = {isa = PBXBuildFile; fileRef = 30BC09441C5358A40078BCA8 /* sdk */; };
+		30BC09471C5359210078BCA8 /* MdUserApi_Sample.mm in Sources */ = {isa = PBXBuildFile; fileRef = 30BC09461C5359210078BCA8 /* MdUserApi_Sample.mm */; };
+		30BC09861C535FBF0078BCA8 /* libkslkc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 30BC09841C535FBF0078BCA8 /* libkslkc.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
+		30BC09871C535FBF0078BCA8 /* libksmarketdataapi.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 30BC09851C535FBF0078BCA8 /* libksmarketdataapi.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
+		30BC098A1C5374D10078BCA8 /* libkslkc.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 30BC09841C535FBF0078BCA8 /* libkslkc.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		30BC098B1C5374D10078BCA8 /* libksmarketdataapi.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 30BC09851C535FBF0078BCA8 /* libksmarketdataapi.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		30BC098D1C5375170078BCA8 /* KSInterB2C.lkc in CopyFiles */ = {isa = PBXBuildFile; fileRef = 30BC09821C535DEE0078BCA8 /* KSInterB2C.lkc */; };
+		30BC098F1C537FD20078BCA8 /* libkstradeapi.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 30BC098E1C537FD20078BCA8 /* libkstradeapi.dylib */; };
+		30BC09901C537FE70078BCA8 /* libkstradeapi.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 30BC098E1C537FD20078BCA8 /* libkstradeapi.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		30BC09351C5357D50078BCA8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 30BC09161C5357D40078BCA8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 30BC091D1C5357D40078BCA8;
+			remoteInfo = testOSXKSTradeAPI;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		30BC09891C5374C30078BCA8 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				30BC09901C537FE70078BCA8 /* libkstradeapi.dylib in CopyFiles */,
+				30BC098A1C5374D10078BCA8 /* libkslkc.dylib in CopyFiles */,
+				30BC098B1C5374D10078BCA8 /* libksmarketdataapi.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		30BC098C1C5375080078BCA8 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				30BC098D1C5375170078BCA8 /* KSInterB2C.lkc in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		30BC091E1C5357D40078BCA8 /* testOSXKSTradeAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testOSXKSTradeAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		30BC09221C5357D40078BCA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		30BC09231C5357D40078BCA8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		30BC09241C5357D40078BCA8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		30BC09281C5357D40078BCA8 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		30BC09291C5357D40078BCA8 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		30BC092B1C5357D40078BCA8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		30BC092E1C5357D40078BCA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		30BC09341C5357D50078BCA8 /* testOSXKSTradeAPITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = testOSXKSTradeAPITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		30BC09391C5357D50078BCA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		30BC093A1C5357D50078BCA8 /* testOSXKSTradeAPITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = testOSXKSTradeAPITests.m; sourceTree = "<group>"; };
+		30BC09441C5358A40078BCA8 /* sdk */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sdk; sourceTree = "<group>"; };
+		30BC09461C5359210078BCA8 /* MdUserApi_Sample.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MdUserApi_Sample.mm; sourceTree = "<group>"; };
+		30BC09821C535DEE0078BCA8 /* KSInterB2C.lkc */ = {isa = PBXFileReference; lastKnownFileType = file; name = KSInterB2C.lkc; path = ../KSInterB2C.lkc; sourceTree = "<group>"; };
+		30BC09841C535FBF0078BCA8 /* libkslkc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libkslkc.dylib; path = "../kingStar/KSFT-API-v2.3.50728/sdk/osx/libkslkc.dylib"; sourceTree = "<group>"; };
+		30BC09851C535FBF0078BCA8 /* libksmarketdataapi.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libksmarketdataapi.dylib; path = "../kingStar/KSFT-API-v2.3.50728/sdk/osx/libksmarketdataapi.dylib"; sourceTree = "<group>"; };
+		30BC098E1C537FD20078BCA8 /* libkstradeapi.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libkstradeapi.dylib; path = sdk/osx/libkstradeapi.dylib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		30BC091B1C5357D40078BCA8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30BC098F1C537FD20078BCA8 /* libkstradeapi.dylib in Frameworks */,
+				30BC09861C535FBF0078BCA8 /* libkslkc.dylib in Frameworks */,
+				30BC09871C535FBF0078BCA8 /* libksmarketdataapi.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		30BC09311C5357D50078BCA8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		30BC09151C5357D40078BCA8 = {
+			isa = PBXGroup;
+			children = (
+				30BC09881C535FC50078BCA8 /* Frameworks */,
+				30BC09441C5358A40078BCA8 /* sdk */,
+				30BC09201C5357D40078BCA8 /* testOSXKSTradeAPI */,
+				30BC09371C5357D50078BCA8 /* testOSXKSTradeAPITests */,
+				30BC091F1C5357D40078BCA8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		30BC091F1C5357D40078BCA8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				30BC091E1C5357D40078BCA8 /* testOSXKSTradeAPI.app */,
+				30BC09341C5357D50078BCA8 /* testOSXKSTradeAPITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		30BC09201C5357D40078BCA8 /* testOSXKSTradeAPI */ = {
+			isa = PBXGroup;
+			children = (
+				30BC09461C5359210078BCA8 /* MdUserApi_Sample.mm */,
+				30BC09231C5357D40078BCA8 /* AppDelegate.h */,
+				30BC09241C5357D40078BCA8 /* AppDelegate.m */,
+				30BC09281C5357D40078BCA8 /* ViewController.h */,
+				30BC09291C5357D40078BCA8 /* ViewController.m */,
+				30BC092B1C5357D40078BCA8 /* Images.xcassets */,
+				30BC092D1C5357D40078BCA8 /* Main.storyboard */,
+				30BC09211C5357D40078BCA8 /* Supporting Files */,
+			);
+			path = testOSXKSTradeAPI;
+			sourceTree = "<group>";
+		};
+		30BC09211C5357D40078BCA8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				30BC09821C535DEE0078BCA8 /* KSInterB2C.lkc */,
+				30BC09221C5357D40078BCA8 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		30BC09371C5357D50078BCA8 /* testOSXKSTradeAPITests */ = {
+			isa = PBXGroup;
+			children = (
+				30BC093A1C5357D50078BCA8 /* testOSXKSTradeAPITests.m */,
+				30BC09381C5357D50078BCA8 /* Supporting Files */,
+			);
+			path = testOSXKSTradeAPITests;
+			sourceTree = "<group>";
+		};
+		30BC09381C5357D50078BCA8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				30BC09391C5357D50078BCA8 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		30BC09881C535FC50078BCA8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				30BC098E1C537FD20078BCA8 /* libkstradeapi.dylib */,
+				30BC09841C535FBF0078BCA8 /* libkslkc.dylib */,
+				30BC09851C535FBF0078BCA8 /* libksmarketdataapi.dylib */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		30BC091D1C5357D40078BCA8 /* testOSXKSTradeAPI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 30BC093E1C5357D50078BCA8 /* Build configuration list for PBXNativeTarget "testOSXKSTradeAPI" */;
+			buildPhases = (
+				30BC091A1C5357D40078BCA8 /* Sources */,
+				30BC091B1C5357D40078BCA8 /* Frameworks */,
+				30BC091C1C5357D40078BCA8 /* Resources */,
+				30BC09891C5374C30078BCA8 /* CopyFiles */,
+				30BC098C1C5375080078BCA8 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = testOSXKSTradeAPI;
+			productName = testOSXKSTradeAPI;
+			productReference = 30BC091E1C5357D40078BCA8 /* testOSXKSTradeAPI.app */;
+			productType = "com.apple.product-type.application";
+		};
+		30BC09331C5357D50078BCA8 /* testOSXKSTradeAPITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 30BC09411C5357D50078BCA8 /* Build configuration list for PBXNativeTarget "testOSXKSTradeAPITests" */;
+			buildPhases = (
+				30BC09301C5357D50078BCA8 /* Sources */,
+				30BC09311C5357D50078BCA8 /* Frameworks */,
+				30BC09321C5357D50078BCA8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				30BC09361C5357D50078BCA8 /* PBXTargetDependency */,
+			);
+			name = testOSXKSTradeAPITests;
+			productName = testOSXKSTradeAPITests;
+			productReference = 30BC09341C5357D50078BCA8 /* testOSXKSTradeAPITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		30BC09161C5357D40078BCA8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "勤飞 张";
+				TargetAttributes = {
+					30BC091D1C5357D40078BCA8 = {
+						CreatedOnToolsVersion = 6.3.1;
+					};
+					30BC09331C5357D50078BCA8 = {
+						CreatedOnToolsVersion = 6.3.1;
+						TestTargetID = 30BC091D1C5357D40078BCA8;
+					};
+				};
+			};
+			buildConfigurationList = 30BC09191C5357D40078BCA8 /* Build configuration list for PBXProject "testOSXKSTradeAPI" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 30BC09151C5357D40078BCA8;
+			productRefGroup = 30BC091F1C5357D40078BCA8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				30BC091D1C5357D40078BCA8 /* testOSXKSTradeAPI */,
+				30BC09331C5357D50078BCA8 /* testOSXKSTradeAPITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		30BC091C1C5357D40078BCA8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30BC09451C5358A40078BCA8 /* sdk in Resources */,
+				30BC092C1C5357D40078BCA8 /* Images.xcassets in Resources */,
+				30BC092F1C5357D40078BCA8 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		30BC09321C5357D50078BCA8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		30BC091A1C5357D40078BCA8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30BC092A1C5357D40078BCA8 /* ViewController.m in Sources */,
+				30BC09471C5359210078BCA8 /* MdUserApi_Sample.mm in Sources */,
+				30BC09251C5357D40078BCA8 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		30BC09301C5357D50078BCA8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30BC093B1C5357D50078BCA8 /* testOSXKSTradeAPITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		30BC09361C5357D50078BCA8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 30BC091D1C5357D40078BCA8 /* testOSXKSTradeAPI */;
+			targetProxy = 30BC09351C5357D50078BCA8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		30BC092D1C5357D40078BCA8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				30BC092E1C5357D40078BCA8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		30BC093C1C5357D50078BCA8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		30BC093D1C5357D50078BCA8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		30BC093F1C5357D50078BCA8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "/Users/qinfeizhang/Dream/kingStar/testOSXKSTradeAPI/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				INFOPLIST_FILE = testOSXKSTradeAPI/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/sdk/osx",
+					"/Users/qinfeizhang/Dream/kingStar/kingStar/KSFT-API-v2.3.50728/sdk/osx",
+				);
+				OTHER_CODE_SIGN_FLAGS = "--deep";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		30BC09401C5357D50078BCA8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = testOSXKSTradeAPI/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/sdk/osx",
+					"/Users/qinfeizhang/Dream/kingStar/kingStar/KSFT-API-v2.3.50728/sdk/osx",
+				);
+				OTHER_CODE_SIGN_FLAGS = "--deep";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		30BC09421C5357D50078BCA8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = testOSXKSTradeAPITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/testOSXKSTradeAPI.app/Contents/MacOS/testOSXKSTradeAPI";
+			};
+			name = Debug;
+		};
+		30BC09431C5357D50078BCA8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = testOSXKSTradeAPITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/testOSXKSTradeAPI.app/Contents/MacOS/testOSXKSTradeAPI";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		30BC09191C5357D40078BCA8 /* Build configuration list for PBXProject "testOSXKSTradeAPI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				30BC093C1C5357D50078BCA8 /* Debug */,
+				30BC093D1C5357D50078BCA8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		30BC093E1C5357D50078BCA8 /* Build configuration list for PBXNativeTarget "testOSXKSTradeAPI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				30BC093F1C5357D50078BCA8 /* Debug */,
+				30BC09401C5357D50078BCA8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		30BC09411C5357D50078BCA8 /* Build configuration list for PBXNativeTarget "testOSXKSTradeAPITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				30BC09421C5357D50078BCA8 /* Debug */,
+				30BC09431C5357D50078BCA8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 30BC09161C5357D40078BCA8 /* Project object */;
+}

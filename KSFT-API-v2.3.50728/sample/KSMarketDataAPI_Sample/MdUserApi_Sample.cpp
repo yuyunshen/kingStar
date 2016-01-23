@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////
 
 #include "stdio.h"
+#include "string.h"
 #include "KSMarketDataAPI.h"
 #include <iostream>
 #ifdef WIN32
@@ -20,6 +21,7 @@
 //HANDLE g_hEvent = CreateEvent(NULL, true, false, NULL);
 
 using namespace KingstarAPI;
+using namespace std;
 
 class CMdUserApiSample : public CThostFtdcMdSpi
 {
@@ -223,13 +225,13 @@ int main(int argc, char* argv[])
 	CThostFtdcMdApi* pUserApi = CThostFtdcMdApi::CreateFtdcMdApi("");
 
 	// 创建spi实例
-	CMdUserApiSample* pSpi = new CMdUserApiSample(pUserApi, "", "80002", "123456");
+	CMdUserApiSample* pSpi = new CMdUserApiSample(pUserApi, "", "201364", "123");
 
 	// 注册spi实例
 	pUserApi->RegisterSpi(pSpi);
 
 	// 注册前置机	
-	pUserApi->RegisterFront("tcp://10.253.117.107:13163");
+	pUserApi->RegisterFront("tcp://210.5.154.195:13163");
 	//pUserApi->RegisterFront("udp://10.253.117.107:20518");
 	//CThostFtdcFensUserInfoField FensUserInfo = {0};
 	//strncpy(FensUserInfo.UserID, "201301", sizeof(FensUserInfo.UserID)-1);
