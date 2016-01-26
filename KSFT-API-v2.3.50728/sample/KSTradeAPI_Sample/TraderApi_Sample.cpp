@@ -9,6 +9,8 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "stdio.h"
+#include "string.h"
+#include <stdlib.h>
 #include "../../sdk/inc/KSTradeAPI.h"
 #include <iostream>
 #ifdef WIN32
@@ -1788,7 +1790,7 @@ void FormatProfitAndLossModifyData (CKSProfitAndLossOrderModify *ProfitAndLossOr
 }
 
 //实例数量
-const int MAX_CONNECTION = 1;
+const int MAX_CONNECTION = 3;
 
 int main(int argc, char* argv[])
 {
