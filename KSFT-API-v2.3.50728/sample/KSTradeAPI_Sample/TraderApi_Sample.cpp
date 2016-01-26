@@ -1790,7 +1790,7 @@ void FormatProfitAndLossModifyData (CKSProfitAndLossOrderModify *ProfitAndLossOr
 }
 
 //实例数量
-const int MAX_CONNECTION = 3;
+const int MAX_CONNECTION = 1;
 
 int main(int argc, char* argv[])
 {
@@ -1807,8 +1807,6 @@ int main(int argc, char* argv[])
 		// 创建spi实例
 		// 运行此程序前请修改BrokerID 用户名及密码
 		pSpi[i] = new CTraderApiSample(pUserApi[i], "31000853", "80002", "123456", "IF1506");
-
-		CCosHandler CosSpiTest;			//产生一个条件单响应的实例
 
 		// 注册spi实例
 		pUserApi[i]->RegisterSpi(pSpi[i]);
@@ -1828,9 +1826,13 @@ int main(int argc, char* argv[])
 		//FensUserInfo.LoginMode = 'E';
 		//pUserApi[i]->RegisterFensUserInfo(&FensUserInfo);
 		// 初始化
+
+		cout<<"Initing"<<endl;
 		pUserApi[i]->Init();
 		getchar();
+		cout<<"Inited"<<endl;
 
+		CCosHandler CosSpiTest;			//产生一个条件单响应的实例
 		pCosAPI = (CKSCosApi *) pUserApi[i]->LoadExtApi(&CosSpiTest,KS_COS_API);	//注册条件单实例
 		if( NULL == pCosAPI )
 		{
