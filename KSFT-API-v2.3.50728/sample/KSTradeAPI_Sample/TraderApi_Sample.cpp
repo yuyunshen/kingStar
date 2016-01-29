@@ -39,9 +39,7 @@ public:
 
     // After making a succeed connection with the server, the client should send the login request to the server.
     virtual void OnFrontConnected() {
-
-        cout<<"connecting"<<endl;
-
+        
         printf("OnFrontConnected:\n");
 
         CThostFtdcReqUserLoginField reqUserLogin;
@@ -1722,7 +1720,8 @@ int main(int argc, char *argv[]) {
 
         // 创建spi实例
         // 运行此程序前请修改BrokerID 用户名及密码
-        pSpi[i] = new CTraderApiSample(pUserApi[i], "31000853", "80002", "123456", "IF1506");
+        pSpi[i] = new CTraderApiSample(pUserApi[i], "31000853", "201364", "123", "IF1506");
+
 
         // 注册spi实例
         pUserApi[i]->RegisterSpi(pSpi[i]);
@@ -1735,7 +1734,7 @@ int main(int argc, char *argv[]) {
 
         // 注册前置机
         // 运行此程序前请修改 IP端口
-        pUserApi[i]->RegisterFront("tcp://10.253.117.107:13163");
+        pUserApi[i]->RegisterFront("tcp://210.5.154.195:13163");
         //pUserApi[i]->RegisterNameServer("tcp://10.253.117.110:11000");
         //CThostFtdcFensUserInfoField FensUserInfo = {0};
         //strncpy(FensUserInfo.UserID, "201301", sizeof(FensUserInfo.UserID)-1);
