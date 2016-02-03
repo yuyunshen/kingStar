@@ -39,7 +39,7 @@ public:
 
     // After making a succeed connection with the server, the client should send the login request to the server.
     virtual void OnFrontConnected() {
-        
+
         printf("OnFrontConnected:\n");
 
         CThostFtdcReqUserLoginField reqUserLogin;
@@ -1720,7 +1720,7 @@ int main(int argc, char *argv[]) {
 
         // 创建spi实例
         // 运行此程序前请修改BrokerID 用户名及密码
-        pSpi[i] = new CTraderApiSample(pUserApi[i], "31000853", "201364", "123", "IF1506");
+        pSpi[i] = new CTraderApiSample(pUserApi[i], "31000853", "201364", "123", "CF1601");
 
 
         // 注册spi实例

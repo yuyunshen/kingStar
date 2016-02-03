@@ -87,15 +87,15 @@ public:
 		printf("ErrorCode=[%d], ErrorMsg=[%s]\n", pRspInfo->ErrorID, pRspInfo->ErrorMsg);
 		printf("RequestID=[%d], Chain=[%d]\n", nRequestID, bIsLast);
 	    // get trading day
-		printf("获取当前交易日 = %s\n",m_pUserApi->GetTradingDay());
+//		printf("获取当前交易日 = %s\n",m_pUserApi->GetTradingDay());
 
 		// 行情订阅列表
-		char *ppInstrumentID[] = {"CF1501"};
+		char *ppInstrumentID[] = {"CF1601"};
 		// 行情订阅个数
 		int iInstrumentID = 1;
         // 	订阅
-		m_pUserApi->SubscribeMarketData(ppInstrumentID, iInstrumentID);	
-		//m_pUserApi->SubscribeForQuoteRsp(ppInstrumentID, iInstrumentID);
+		m_pUserApi->SubscribeMarketData(ppInstrumentID, iInstrumentID);
+//		m_pUserApi->SubscribeForQuoteRsp(ppInstrumentID, iInstrumentID);
 		
 	}
 
@@ -105,16 +105,16 @@ public:
 		printf("OnRspSubMarketData:%s\n", pSpecificInstrument->InstrumentID);
 		printf("ErrorCode=[%d], ErrorMsg=[%s]\n", pRspInfo->ErrorID, pRspInfo->ErrorMsg);
 
-/*
-		if (bIsLast == true)
-		{
-			// 行情退订列表
-			char *ppInstrumentID[] = {"CF1501"};			
-			// 行情退订个数
-			int iInstrumentID = 1;
-			m_pUserApi->UnSubscribeMarketData(ppInstrumentID,iInstrumentID);
-		}
-*/
+
+//		if (bIsLast == true)
+//		{
+//			// 行情退订列表
+//			char *ppInstrumentID[] = {"CF1601"};
+//			// 行情退订个数
+//			int iInstrumentID = 1;
+//			m_pUserApi->UnSubscribeMarketData(ppInstrumentID,iInstrumentID);
+//		}
+
 	}
 
 	///OnRspUnSubMarketData return
@@ -123,21 +123,20 @@ public:
 		printf("OnRspUnSubMarketData:\n");
 		printf("ErrorCode=[%d], ErrorMsg=[%s]\n", pRspInfo->ErrorID, pRspInfo->ErrorMsg);
 
-		return;
+//		if (bIsLast)
+//		{
+//			// logout
+//			CThostFtdcUserLogoutField UserLogout;
+//			memset(&UserLogout, 0, sizeof(UserLogout));
+//			// broker id
+//			strcpy(UserLogout.BrokerID, m_chBrokerID);
+//			// investor ID
+//			strcpy(UserLogout.UserID, m_chUserID);
+//
+//			m_pUserApi->ReqUserLogout(&UserLogout,3);
+//		}
 
-		if (bIsLast)
-		{
-			// logout
-			CThostFtdcUserLogoutField UserLogout;
-			memset(&UserLogout, 0, sizeof(UserLogout));
-			// broker id 
-			strcpy(UserLogout.BrokerID, m_chBrokerID); 
-			// investor ID 
-			strcpy(UserLogout.UserID, m_chUserID);
-
-			m_pUserApi->ReqUserLogout(&UserLogout,3);
-		}
-
+//		return;
     }
 
 	virtual void OnRspSubForQuoteRsp(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
