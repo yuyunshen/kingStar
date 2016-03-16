@@ -639,9 +639,9 @@ public:
             // investor ID
             strcpy(QryTrade.InvestorID, m_chUserID);
             // start time
-            strcpy(QryTrade.TradeTimeStart, "20110530");
+            strcpy(QryTrade.TradeTimeStart, "20160101");
             // end time
-            strcpy(QryTrade.TradeTimeEnd, "20110601");
+            strcpy(QryTrade.TradeTimeEnd, "20160228");
             // exchange id
             strcpy(QryTrade.ExchangeID, "SHFE");
             // instructment id
@@ -753,9 +753,9 @@ public:
             // user id
             strcpy(UserPasswordUpdate.UserID, m_chUserID);
             // old password
-            strcpy(UserPasswordUpdate.OldPassword, "123456");
+            strcpy(UserPasswordUpdate.OldPassword, "233438");
             // new password
-            strcpy(UserPasswordUpdate.NewPassword, "123456");
+            strcpy(UserPasswordUpdate.NewPassword, "233438");
 
             m_pUserApi->ReqUserPasswordUpdate(&UserPasswordUpdate, m_nRequestID++);
         }
@@ -785,9 +785,9 @@ public:
             // account id
             strcpy(TradingAccountPasswordUpdate.AccountID, m_chUserID);
             // old password
-            strcpy(TradingAccountPasswordUpdate.OldPassword, "123456");
+            strcpy(TradingAccountPasswordUpdate.OldPassword, "233438");
             // new password
-            strcpy(TradingAccountPasswordUpdate.NewPassword, "123456");
+            strcpy(TradingAccountPasswordUpdate.NewPassword, "233438");
 
             m_pUserApi->ReqTradingAccountPasswordUpdate(&TradingAccountPasswordUpdate, m_nRequestID++);
         }
@@ -1557,31 +1557,51 @@ public:
 };
 
 void FormatConditionalInsertData(CKSConditionalOrderInitInsert *ConditionOrder) {
-    strcpy(ConditionOrder->BrokerID, "6A89B428");
+
+    strcpy(ConditionOrder->BrokerID, "3748FD77");
     strcpy(ConditionOrder->ExchangeID, "CFFEX");
-    strcpy(ConditionOrder->InvestorID, "80002");
-    strcpy(ConditionOrder->InstrumentID, "IF1303");
+    strcpy(ConditionOrder->InvestorID, "90093907");
+    strcpy(ConditionOrder->InstrumentID, "IF1603");
     ConditionOrder->Direction = '0';
     ConditionOrder->CombOffsetFlag = '0';
     ConditionOrder->CombHedgeFlag = '1';
     ConditionOrder->VolumeTotalOriginal = 2;
-    ConditionOrder->LimitPrice = 200;
+    ConditionOrder->LimitPrice = 400;
     ConditionOrder->OrderPriceType = '1';
     ConditionOrder->ConditionalType = '1';    //条件类别
-    ConditionOrder->ConditionalPrice = 300;
+    ConditionOrder->ConditionalPrice = 400;
     ConditionOrder->TriggeredTimes = 2;
     ConditionOrder->OrderType = '1';
     strcpy(ConditionOrder->ActiveTime, "142010");
     strcpy(ConditionOrder->InActiveTime, "162010");
     strcpy(ConditionOrder->CurrencyID, "RMB");
 
+
+//    strcpy(ConditionOrder->BrokerID, "6A89B428");
+//    strcpy(ConditionOrder->ExchangeID, "CFFEX");
+//    strcpy(ConditionOrder->InvestorID, "80002");
+//    strcpy(ConditionOrder->InstrumentID, "IF1303");
+//    ConditionOrder->Direction = '0';
+//    ConditionOrder->CombOffsetFlag = '0';
+//    ConditionOrder->CombHedgeFlag = '1';
+//    ConditionOrder->VolumeTotalOriginal = 2;
+//    ConditionOrder->LimitPrice = 200;
+//    ConditionOrder->OrderPriceType = '1';
+//    ConditionOrder->ConditionalType = '1';    //条件类别
+//    ConditionOrder->ConditionalPrice = 300;
+//    ConditionOrder->TriggeredTimes = 2;
+//    ConditionOrder->OrderType = '1';
+//    strcpy(ConditionOrder->ActiveTime, "142010");
+//    strcpy(ConditionOrder->InActiveTime, "162010");
+//    strcpy(ConditionOrder->CurrencyID, "RMB");
+
     return;
 
 }
 
 void FormatConditionalQueryData(CKSConditionalOrderQuery *Querycondition) {
-    strcpy(Querycondition->BrokerID, "6A89B428");
-    strcpy(Querycondition->InvestorID, "80002");
+    strcpy(Querycondition->BrokerID, "3748FD77");
+    strcpy(Querycondition->InvestorID, "90093907");
     ///不存在的单号
     //Querycondition->ConditionalOrderID  = 90;
 
@@ -1720,8 +1740,7 @@ int main(int argc, char *argv[]) {
 
         // 创建spi实例
         // 运行此程序前请修改BrokerID 用户名及密码
-        pSpi[i] = new CTraderApiSample(pUserApi[i], "31000853", "201364", "123", "CF1601");
-
+        pSpi[i] = new CTraderApiSample(pUserApi[i], "3748FD77", "90093907", "233438", "IF1603");
 
         // 注册spi实例
         pUserApi[i]->RegisterSpi(pSpi[i]);
@@ -1734,7 +1753,7 @@ int main(int argc, char *argv[]) {
 
         // 注册前置机
         // 运行此程序前请修改 IP端口
-        pUserApi[i]->RegisterFront("tcp://210.5.154.195:13163");
+        pUserApi[i]->RegisterFront("tcp://122.224.197.22:15159");
         //pUserApi[i]->RegisterNameServer("tcp://10.253.117.110:11000");
         //CThostFtdcFensUserInfoField FensUserInfo = {0};
         //strncpy(FensUserInfo.UserID, "201301", sizeof(FensUserInfo.UserID)-1);

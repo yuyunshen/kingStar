@@ -224,13 +224,13 @@ int main(int argc, char* argv[])
 	CThostFtdcMdApi* pUserApi = CThostFtdcMdApi::CreateFtdcMdApi("");
 
 	// 创建spi实例
-	CMdUserApiSample* pSpi = new CMdUserApiSample(pUserApi, "", "201364", "123");
+	CMdUserApiSample* pSpi = new CMdUserApiSample(pUserApi, "", "90093907", "233438");
 
 	// 注册spi实例
 	pUserApi->RegisterSpi(pSpi);
 
 	// 注册前置机	
-	pUserApi->RegisterFront("tcp://210.5.154.195:13163");
+	pUserApi->RegisterFront("tcp://122.224.197.22:15159");
 	//pUserApi->RegisterFront("udp://10.253.117.107:20518");
 	//CThostFtdcFensUserInfoField FensUserInfo = {0};
 	//strncpy(FensUserInfo.UserID, "201301", sizeof(FensUserInfo.UserID)-1);
