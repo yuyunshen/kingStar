@@ -22,6 +22,8 @@ using namespace std;
 //使用KingstarAPI命名空间
 using namespace KingstarAPI;
 
+char* contactId = "IF1604";
+
 class CTraderApiSample : public CThostFtdcTraderSpi, public CKSVocSpi {
 public:
     CTraderApiSample(CThostFtdcTraderApi *pUserApi, TThostFtdcBrokerIDType chBrokerID, TThostFtdcUserIDType chUserID,
@@ -190,7 +192,7 @@ public:
         memset(&QryExchange, 0, sizeof(QryExchange));
         // exchange id
         //交易所代码 上期SHFE  大商DCE  郑商CZCE  中金CFFEX  原油INE  上证SSE  深证SZSE
-        strcpy(QryExchange.ExchangeID, "SHFE");
+        strcpy(QryExchange.ExchangeID, "CFFEX");
 
         m_pUserApi->ReqQryExchange(&QryExchange, m_nRequestID++);
     }
@@ -213,7 +215,7 @@ public:
             CThostFtdcQryInstrumentField QryInstrument;
             memset(&QryInstrument, 0, sizeof(QryInstrument));
             // exchange id
-            strcpy(QryInstrument.ExchangeID, "SHFE");
+            strcpy(QryInstrument.ExchangeID, "CFFEX");
             strcpy(QryInstrument.InstrumentID, m_chContract);
 
             m_pUserApi->ReqQryInstrument(&QryInstrument, m_nRequestID++);
@@ -426,7 +428,7 @@ public:
             // instrument ID
             strcpy(ord.InstrumentID, m_chContract);
             //下单需填交易所代码
-            strcpy(ord.ExchangeID, "SHFE");
+            strcpy(ord.ExchangeID, "CFFEX");
             ///order reference
             strcpy(ord.OrderRef, "9");
             // user id
@@ -481,144 +483,6 @@ public:
 
     }
 
-    // order insertion response
-    virtual void OnRspOrderInsert(CThostFtdcInputOrderField *pInputOrder, CThostFtdcRspInfoField *pRspInfo,
-                                  int nRequestID, bool bIsLast) {
-        printf("OnRspOrderInsert:");
-        if (NULL != pInputOrder) {
-            printf("%s", pInputOrder->OrderRef);
-        }
-        printf("\n");
-        printf("ErrorCode=[%d], ErrorMsg=[%s]\n", pRspInfo->ErrorID, pRspInfo->ErrorMsg);
-        printf("RequestID=[%d], Chain=[%d]\n", nRequestID, bIsLast);
-
-    };
-
-    // order insertion return
-    virtual void OnRtnOrder(CThostFtdcOrderField *pOrder) {
-        printf("OnRtnOrder:");
-        if (NULL != pOrder) {
-            printf("%d|%s|OrderSysID:%s|OrderLocalID:%s|%s|%s|%c|%s|%c|%s|%s|%d|%.04f|%d|%d|%s|%s|%s|%c|%c|%c|%c|%.04f|%s|%s|",
-                   pOrder->SequenceNo,                            // 序号
-                   pOrder->InvestorID,                            // 客户号
-                   pOrder->OrderSysID,                            // 委托号
-                   pOrder->OrderLocalID,                        // 本地报单编号
-                   pOrder->ExchangeID,                            // 交易所代码
-                   pOrder->InstrumentID,                        // 合约号
-                   pOrder->OrderStatus,                        // 报单状态
-                   pOrder->StatusMsg,                            // 状态信息
-                   pOrder->Direction,                            // 买卖标记
-                   pOrder->CombOffsetFlag,                        // 开平仓标志
-                   pOrder->CombHedgeFlag,                        // 投保标记
-                   pOrder->VolumeTotalOriginal,                // 委托数量
-                   pOrder->LimitPrice,                            // 委托价格
-                   pOrder->VolumeTraded,                        // 成交数量
-                   pOrder->VolumeTotal,                        // 未成交数量
-                   pOrder->TradingDay,                            // 交割期
-                   pOrder->InsertTime,                            // 委托时间
-                   pOrder->CancelTime,                            // 撤单时间
-                   pOrder->OrderType,                            // 报单类型
-                   pOrder->OrderSource,                        // 报单来源
-                   pOrder->OrderPriceType,                        // 报单价格条件
-                   pOrder->TimeCondition,                        // 有效期类型
-                   pOrder->StopPrice,                            // 止损价
-                   pOrder->ActiveTime,                            // 激活时间
-                   pOrder->OrderRef                            // 报单引用
-            );
-        }
-        printf("\n");
-        printf("RequestID=[%d]\n", pOrder->RequestID);
-
-        // order insertion success, then send order action request.
-        if (pOrder->OrderStatus == THOST_FTDC_OST_NoTradeQueueing && atoi(pOrder->OrderSysID) != 0) {
-            // delete ord
-            CThostFtdcInputOrderActionField ord;
-            memset(&ord, 0, sizeof(ord));
-            // broker id
-            strcpy(ord.BrokerID, m_chBrokerID);
-            // investor ID
-            strcpy(ord.InvestorID, m_chUserID);
-            // order action refernce
-            ord.OrderActionRef = 000000000001;
-
-            /// order reference
-            strcpy(ord.OrderRef, pOrder->OrderRef);        // *必传1
-            // front id
-            ord.FrontID = pOrder->FrontID;                // *必传2
-            // session id
-            ord.SessionID = pOrder->SessionID;            // *必传3
-
-            // exchange ID
-            strcpy(ord.ExchangeID, pOrder->ExchangeID);    // *必传4
-            // 报单到交易所后可用ExchangeID+OrderSysID撤单，否则用OrderRef+FrontID+SessionID+ExchangeID撤单
-            // action order ID
-            strcpy(ord.OrderSysID, pOrder->OrderSysID);
-
-            //  action order num(unavailable yet)
-            ord.VolumeChange = 0;
-            // instrument ID
-            strcpy(ord.InstrumentID, pOrder->InstrumentID);
-            // user id
-            strcpy(ord.UserID, m_chUserID);
-
-            m_pUserApi->ReqOrderAction(&ord, m_nRequestID++);
-        }
-    }
-
-    ///trade return
-    virtual void OnRtnTrade(CThostFtdcTradeField *pTrade) {
-        static int s_nTotalBuy = 0;
-        static int s_nTotalSell = 0;
-
-        printf("OnRtnTrade:");
-        if (NULL != pTrade) {
-            if (pTrade->Direction == THOST_FTDC_D_Buy)
-                s_nTotalBuy += pTrade->Volume;
-            else if (pTrade->Direction == THOST_FTDC_D_Sell)
-                s_nTotalSell += pTrade->Volume;
-            else
-                printf("invalid direction:%c\n", pTrade->Direction);
-
-            printf("%d|%s|%s|%s|%s|成交|%c|%c|%c|%d|%.04f|%s|%s|%s|%s|s_nTotalBuy=%d|s_nTotalSell=%d|",
-                   pTrade->SequenceNo,                    // 序号
-                   pTrade->InvestorID,                    // 客户号
-                   pTrade->ExchangeID,                    // 交易所代码
-                   pTrade->OrderSysID,                    // 委托单号
-                   pTrade->InstrumentID,                // 合约编码
-                   pTrade->Direction,                    // 买卖标记
-                   pTrade->OffsetFlag,                    // 开平仓标志
-                   pTrade->HedgeFlag,                    // 投保标记
-                   pTrade->Volume,                        // 成交数量
-                   pTrade->Price,                        // 成交价格
-                   pTrade->TradeID,                    // 成交号
-                   pTrade->TradingDay,                    // 交割期
-                   pTrade->TradeTime,                    // 成交时间
-                   pTrade->OrderRef,                    // 报单引用
-                   s_nTotalBuy,
-                   s_nTotalSell
-            );
-        }
-        printf("\n");
-    }
-
-    // output the order action result
-    virtual void OnRspOrderAction(CThostFtdcInputOrderActionField *pInputOrderAction, CThostFtdcRspInfoField *pRspInfo,
-                                  int nRequestID, bool bIsLast) {
-        printf("OnRspOrderAction:");
-        if (NULL != pInputOrderAction) {
-            printf("%s|OrderSysID:%s|%s|%s|%.04f|",
-                   pInputOrderAction->InvestorID,                            // 客户号
-                   pInputOrderAction->OrderSysID,                            // 委托号
-                   pInputOrderAction->ExchangeID,                            // 交易所代码
-                   pInputOrderAction->InstrumentID,                        // 合约号
-                   pInputOrderAction->LimitPrice                            // 委托价格
-            );
-        }
-        printf("\n");
-        printf("ErrorCode=[%d], ErrorMsg=[%s]\n", pRspInfo->ErrorID, pRspInfo->ErrorMsg);
-        printf("RequestID=[%d], Chain=[%d]\n", nRequestID, bIsLast);
-    }
-
     // qryorder return
     virtual void OnRspQryOrder(CThostFtdcOrderField *pOrder, CThostFtdcRspInfoField *pRspInfo, int nRequestID,
                                bool bIsLast) {
@@ -643,7 +507,7 @@ public:
             // end time
             strcpy(QryTrade.TradeTimeEnd, "20160228");
             // exchange id
-            strcpy(QryTrade.ExchangeID, "SHFE");
+            strcpy(QryTrade.ExchangeID, "CFFEX");
             // instructment id
             strcpy(QryTrade.InstrumentID, m_chContract);
 
@@ -854,7 +718,7 @@ public:
     ///QrySettlementInfo return
     virtual void OnRspQrySettlementInfo(CThostFtdcSettlementInfoField *pSettlementInfo,
                                         CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {
-        printf("OnRspQrySettlementInfoConfirm:");
+        printf("OnRspQrySettlementInfo:");
         if (pSettlementInfo != NULL) {
             printf("%s|%s|",
                    pSettlementInfo->InvestorID,            // 客户号
@@ -1106,8 +970,147 @@ public:
             strcpy(UserLogout.BrokerID, m_chBrokerID);
             // investor ID
             strcpy(UserLogout.UserID, m_chUserID);
-            m_pUserApi->ReqUserLogout(&UserLogout, m_nRequestID++);
+//            m_pUserApi->ReqUserLogout(&UserLogout, m_nRequestID++);
         }
+    }
+
+
+    // order insertion response
+    virtual void OnRspOrderInsert(CThostFtdcInputOrderField *pInputOrder, CThostFtdcRspInfoField *pRspInfo,
+                                  int nRequestID, bool bIsLast) {
+        printf("OnRspOrderInsert:");
+        if (NULL != pInputOrder) {
+            printf("%s", pInputOrder->OrderRef);
+        }
+        printf("\n");
+        printf("ErrorCode=[%d], ErrorMsg=[%s]\n", pRspInfo->ErrorID, pRspInfo->ErrorMsg);
+        printf("RequestID=[%d], Chain=[%d]\n", nRequestID, bIsLast);
+
+    };
+
+    // order insertion return
+    virtual void OnRtnOrder(CThostFtdcOrderField *pOrder) {
+        printf("OnRtnOrder:");
+        if (NULL != pOrder) {
+            printf("%d|%s|OrderSysID:%s|OrderLocalID:%s|%s|%s|%c|%s|%c|%s|%s|%d|%.04f|%d|%d|%s|%s|%s|%c|%c|%c|%c|%.04f|%s|%s|",
+                   pOrder->SequenceNo,                            // 序号
+                   pOrder->InvestorID,                            // 客户号
+                   pOrder->OrderSysID,                            // 委托号
+                   pOrder->OrderLocalID,                        // 本地报单编号
+                   pOrder->ExchangeID,                            // 交易所代码
+                   pOrder->InstrumentID,                        // 合约号
+                   pOrder->OrderStatus,                        // 报单状态
+                   pOrder->StatusMsg,                            // 状态信息
+                   pOrder->Direction,                            // 买卖标记
+                   pOrder->CombOffsetFlag,                        // 开平仓标志
+                   pOrder->CombHedgeFlag,                        // 投保标记
+                   pOrder->VolumeTotalOriginal,                // 委托数量
+                   pOrder->LimitPrice,                            // 委托价格
+                   pOrder->VolumeTraded,                        // 成交数量
+                   pOrder->VolumeTotal,                        // 未成交数量
+                   pOrder->TradingDay,                            // 交割期
+                   pOrder->InsertTime,                            // 委托时间
+                   pOrder->CancelTime,                            // 撤单时间
+                   pOrder->OrderType,                            // 报单类型
+                   pOrder->OrderSource,                        // 报单来源
+                   pOrder->OrderPriceType,                        // 报单价格条件
+                   pOrder->TimeCondition,                        // 有效期类型
+                   pOrder->StopPrice,                            // 止损价
+                   pOrder->ActiveTime,                            // 激活时间
+                   pOrder->OrderRef                            // 报单引用
+            );
+        }
+        printf("\n");
+        printf("RequestID=[%d]\n", pOrder->RequestID);
+
+        // order insertion success, then send order action request.
+        if (pOrder->OrderStatus == THOST_FTDC_OST_NoTradeQueueing && atoi(pOrder->OrderSysID) != 0) {
+            // delete ord
+            CThostFtdcInputOrderActionField ord;
+            memset(&ord, 0, sizeof(ord));
+            // broker id
+            strcpy(ord.BrokerID, m_chBrokerID);
+            // investor ID
+            strcpy(ord.InvestorID, m_chUserID);
+            // order action refernce
+            ord.OrderActionRef = 000000000001;
+
+            /// order reference
+            strcpy(ord.OrderRef, pOrder->OrderRef);        // *必传1
+            // front id
+            ord.FrontID = pOrder->FrontID;                // *必传2
+            // session id
+            ord.SessionID = pOrder->SessionID;            // *必传3
+
+            // exchange ID
+            strcpy(ord.ExchangeID, pOrder->ExchangeID);    // *必传4
+            // 报单到交易所后可用ExchangeID+OrderSysID撤单，否则用OrderRef+FrontID+SessionID+ExchangeID撤单
+            // action order ID
+            strcpy(ord.OrderSysID, pOrder->OrderSysID);
+
+            //  action order num(unavailable yet)
+            ord.VolumeChange = 0;
+            // instrument ID
+            strcpy(ord.InstrumentID, pOrder->InstrumentID);
+            // user id
+            strcpy(ord.UserID, m_chUserID);
+
+            m_pUserApi->ReqOrderAction(&ord, m_nRequestID++);
+        }
+    }
+
+    ///trade return
+    virtual void OnRtnTrade(CThostFtdcTradeField *pTrade) {
+        static int s_nTotalBuy = 0;
+        static int s_nTotalSell = 0;
+
+        printf("OnRtnTrade:");
+        if (NULL != pTrade) {
+            if (pTrade->Direction == THOST_FTDC_D_Buy)
+                s_nTotalBuy += pTrade->Volume;
+            else if (pTrade->Direction == THOST_FTDC_D_Sell)
+                s_nTotalSell += pTrade->Volume;
+            else
+                printf("invalid direction:%c\n", pTrade->Direction);
+
+            printf("%d|%s|%s|%s|%s|成交|%c|%c|%c|%d|%.04f|%s|%s|%s|%s|s_nTotalBuy=%d|s_nTotalSell=%d|",
+                   pTrade->SequenceNo,                    // 序号
+                   pTrade->InvestorID,                    // 客户号
+                   pTrade->ExchangeID,                    // 交易所代码
+                   pTrade->OrderSysID,                    // 委托单号
+                   pTrade->InstrumentID,                // 合约编码
+                   pTrade->Direction,                    // 买卖标记
+                   pTrade->OffsetFlag,                    // 开平仓标志
+                   pTrade->HedgeFlag,                    // 投保标记
+                   pTrade->Volume,                        // 成交数量
+                   pTrade->Price,                        // 成交价格
+                   pTrade->TradeID,                    // 成交号
+                   pTrade->TradingDay,                    // 交割期
+                   pTrade->TradeTime,                    // 成交时间
+                   pTrade->OrderRef,                    // 报单引用
+                   s_nTotalBuy,
+                   s_nTotalSell
+            );
+        }
+        printf("\n");
+    }
+
+    // output the order action result
+    virtual void OnRspOrderAction(CThostFtdcInputOrderActionField *pInputOrderAction, CThostFtdcRspInfoField *pRspInfo,
+                                  int nRequestID, bool bIsLast) {
+        printf("OnRspOrderAction:");
+        if (NULL != pInputOrderAction) {
+            printf("%s|OrderSysID:%s|%s|%s|%.04f|",
+                   pInputOrderAction->InvestorID,                            // 客户号
+                   pInputOrderAction->OrderSysID,                            // 委托号
+                   pInputOrderAction->ExchangeID,                            // 交易所代码
+                   pInputOrderAction->InstrumentID,                        // 合约号
+                   pInputOrderAction->LimitPrice                            // 委托价格
+            );
+        }
+        printf("\n");
+        printf("ErrorCode=[%d], ErrorMsg=[%s]\n", pRspInfo->ErrorID, pRspInfo->ErrorMsg);
+        printf("RequestID=[%d], Chain=[%d]\n", nRequestID, bIsLast);
     }
 
     // logout return
@@ -1561,18 +1564,18 @@ void FormatConditionalInsertData(CKSConditionalOrderInitInsert *ConditionOrder) 
     strcpy(ConditionOrder->BrokerID, "3748FD77");
     strcpy(ConditionOrder->ExchangeID, "CFFEX");
     strcpy(ConditionOrder->InvestorID, "90093907");
-    strcpy(ConditionOrder->InstrumentID, "IF1603");
-    ConditionOrder->Direction = '0';
+    strcpy(ConditionOrder->InstrumentID, contactId);
+    ConditionOrder->Direction = '1';
     ConditionOrder->CombOffsetFlag = '0';
     ConditionOrder->CombHedgeFlag = '1';
     ConditionOrder->VolumeTotalOriginal = 2;
-    ConditionOrder->LimitPrice = 400;
+    ConditionOrder->LimitPrice = 4000;
     ConditionOrder->OrderPriceType = '1';
     ConditionOrder->ConditionalType = '1';    //条件类别
-    ConditionOrder->ConditionalPrice = 400;
+    ConditionOrder->ConditionalPrice = 0;
     ConditionOrder->TriggeredTimes = 2;
     ConditionOrder->OrderType = '1';
-    strcpy(ConditionOrder->ActiveTime, "142010");
+    strcpy(ConditionOrder->ActiveTime, "092010");
     strcpy(ConditionOrder->InActiveTime, "162010");
     strcpy(ConditionOrder->CurrencyID, "RMB");
 
@@ -1725,6 +1728,80 @@ void FormatProfitAndLossModifyData(CKSProfitAndLossOrderModify *ProfitAndLossOrd
     return;
 }
 
+
+void FormatOrderField(CThostFtdcInputOrderField *orderField, int m_nRequestID) {
+
+    strcpy(orderField->BrokerID, "6A89B428");
+    strcpy(orderField->InvestorID, "90093907");
+    strcpy(orderField->InstrumentID, contactId);
+
+    strcpy(orderField->ExchangeID, "CFFEX");
+
+    strcpy(orderField->OrderRef, "11");
+
+    strcpy(orderField->UserID, "90093907");
+
+    orderField->OrderPriceType = THOST_FTDC_OPT_LimitPrice;
+
+    orderField->Direction = THOST_FTDC_D_Buy;
+
+    orderField->CombOffsetFlag[0] = THOST_FTDC_OF_Open;
+
+    orderField->CombHedgeFlag[0] = THOST_FTDC_HF_Speculation;
+
+    orderField->LimitPrice = 3205;
+
+    orderField->VolumeTotalOriginal = 1;
+
+    orderField->TimeCondition = THOST_FTDC_TC_GFD;
+
+    strcpy(orderField->GTDDate, "");
+
+    orderField->VolumeCondition = THOST_FTDC_VC_AV;
+
+    orderField->MinVolume = 0;
+
+    orderField->ContingentCondition = THOST_FTDC_CC_Immediately;
+
+    orderField->StopPrice = 0;
+
+    orderField->ForceCloseReason = THOST_FTDC_FCC_NotForceClose;
+
+    orderField->IsAutoSuspend = 0;
+
+    orderField->RequestID = m_nRequestID;
+
+
+//    TThostFtdcOrderRefType OrderRef;
+/////用户代码
+//    TThostFtdcUserIDType UserID;
+/////报单价格条件
+//    TThostFtdcOrderPriceTypeType OrderPriceType; ///买卖方向
+//    TThostFtdcDirectionType Direction; ///组合开平标志
+//    TThostFtdcCombOffsetFlagType CombOffsetFlag; ///组合投机套保标志 TThostFtdcCombHedgeFlagType CombHedgeFlag; ///价格
+//    TThostFtdcPriceType LimitPrice;
+/////数量
+//    TThostFtdcVolumeType VolumeTotalOriginal; ///有效期类型
+//    TThostFtdcTimeConditionType TimeCondition; ///GTD 日期
+//    TThostFtdcDateType GTDDate;
+/////成交量类型
+//    TThostFtdcVolumeConditionType VolumeCondition;
+//    TThostFtdcVolumeType MinVolume;
+/////触发条件
+//    TThostFtdcContingentConditionType ContingentCondition; ///止损价
+//    TThostFtdcPriceType StopPrice;
+/////强平原因
+//    TThostFtdcForceCloseReasonType ForceCloseReason; ///自动挂起标志
+//    TThostFtdcBoolType IsAutoSuspend;
+/////业务单元
+//    TThostFtdcBusinessUnitType BusinessUnit;
+/////请求编号
+//    TThostFtdcRequestIDType RequestID;
+/////用户强评标志
+//    TThostFtdcBoolType UserForceClose;
+}
+
+
 //实例数量
 const int MAX_CONNECTION = 1;
 
@@ -1734,23 +1811,36 @@ int main(int argc, char *argv[]) {
     CKSCosApi *pCosAPI = NULL;
 
     for (int i = 0; i < MAX_CONNECTION; i++) {
+
+
+        cout << "step1" << endl;
         // 创建实例
         // 运行此程序前请将环境服务商提供的授权文件放在程序运行目录
         pUserApi[i] = CThostFtdcTraderApi::CreateFtdcTraderApi();
 
+
+        cout << "step2" << endl;
         // 创建spi实例
         // 运行此程序前请修改BrokerID 用户名及密码
-        pSpi[i] = new CTraderApiSample(pUserApi[i], "3748FD77", "90093907", "233438", "IF1603");
+        pSpi[i] = new CTraderApiSample(pUserApi[i], "3748FD77", "90093907", "233438", contactId);
 
+
+        cout << "step3" << endl;
         // 注册spi实例
         pUserApi[i]->RegisterSpi(pSpi[i]);
 
+
+        cout << "step4" << endl;
         //订阅私有流
         pUserApi[i]->SubscribePrivateTopic(THOST_TERT_RESUME);
 
+
+        cout << "step5" << endl;
         //订阅公有流
         pUserApi[i]->SubscribePublicTopic(THOST_TERT_QUICK);
 
+
+        cout << "step6" << endl;
         // 注册前置机
         // 运行此程序前请修改 IP端口
         pUserApi[i]->RegisterFront("tcp://122.224.197.22:15159");
@@ -1761,11 +1851,25 @@ int main(int argc, char *argv[]) {
         //pUserApi[i]->RegisterFensUserInfo(&FensUserInfo);
         // 初始化
 
+
+        cout << "step7" << endl;
         cout << "Initing" << endl;
         pUserApi[i]->Init();
         getchar();
         cout << "Inited" << endl;
 
+
+        CThostFtdcInputOrderField orderField;
+        memset(&orderField, 0, sizeof(orderField));
+        FormatOrderField(&orderField, pSpi[i]->m_nRequestID);
+
+
+        cout<<"requestID: "<<pSpi[i]->m_nRequestID<<endl;
+        pUserApi[i]->ReqOrderInsert(&orderField, pSpi[i]->m_nRequestID++);
+
+
+        /*
+        cout << "step8" << endl;
         CCosHandler CosSpiTest;            //产生一个条件单响应的实例
         pCosAPI = (CKSCosApi *) pUserApi[i]->LoadExtApi(&CosSpiTest, KS_COS_API);    //注册条件单实例
         if (NULL == pCosAPI) {
@@ -1776,13 +1880,18 @@ int main(int argc, char *argv[]) {
         memset(&ConditionOrder, 0, sizeof(ConditionOrder));
         FormatConditionalInsertData(&ConditionOrder);
 
+        cout << "step9" << endl;
         //查询条件单实例
         CKSConditionalOrderQuery Querycondition;
         memset(&Querycondition, 0, sizeof(CKSConditionalOrderQuery));
         FormatConditionalQueryData(&Querycondition);
 
+        cout << "step10" << endl;
         pCosAPI->ReqInitInsertConditionalOrder(&ConditionOrder, pSpi[i]->m_nRequestID++);
+
+        cout << "step11" << endl;
         pCosAPI->ReqQueryConditionalOrder(&Querycondition, pSpi[i]->m_nRequestID++);
+        */
     }
 
     printf("\npress return to quit...\n");
